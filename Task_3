@@ -1,42 +1,7 @@
 import numpy as np
 import scipy.stats as stats
 
-mother = np.array([178, 165, 165, 173, 168, 155, 160, 164, 178, 175])
-daughter = np.array([175, 167, 154, 174, 178, 148, 160, 167, 169, 170])
+x1 = np.array([380, 420, 290])
+y1 = np.array([140, 360, 200, 900])
 
-l_m = len(mother)
-l_d = len(daughter)
-
-print('Длина выборки ростов матерей - ',l_m, 'Длина выборки ростов дочерей -',l_d)
-
-m_sr = np.mean(mother)
-d_sr = np.mean(daughter)
-
-delta = m_sr - d_sr
-
-print('Дельта ростов матерей и дочерей - ', delta)
-
-Dm = np.var(mother, ddof=1)
-
-print('Несмещенная дисперсия для выборки ростов матерей - ', Dm)
-
-Dd = np.var(daughter, ddof=1)
-print('Несмещенная дисперсия для выборки ростов дочерей - ', Dd)
-
-D = (Dd + Dm) / 2
-
-print('Объединенная оценка дисперсии', D)
-
-SE = np.sqrt (D/l_m + D/l_d)
-
-print ('Стандартная ошибка разности средних -', SE)
-
-t = stats.t.ppf(0.975, 18)
-
-print('T-критерий', t)
-
-A = delta + t * SE
-
-B = delta - t * SE
-
-print ('Доверительный интервалл [', B,';', A,']')
+print(stats.mannwhitneyu(x1, y1))
